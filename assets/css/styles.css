@@ -1,0 +1,139 @@
+/* ------------------------------------
+   CSS Variables for Consistency
+------------------------------------ */
+:root {
+  --primary-color: #172147; /* your main brand color */
+  --primary-hover: #0f1833; /* darker hover state */
+  --secondary-bg: #f8f9fa; /* secondary background color */
+  --heading-color: #1a1a1a;
+  --text-color: #4a4a4a;
+  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ------------------------------------
+   Hero Section
+------------------------------------ */
+.hero-section {
+  /* Adjust gradient or remove if you prefer a solid color */
+  background: linear-gradient(to right, var(--secondary-bg) 50%, #fff 50%);
+  padding: 60px 0;
+}
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+.hero-subtext {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+.search-tutor-btn {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: #fff;
+  transition: background 0.3s ease-in-out;
+}
+.search-tutor-btn:hover {
+  background: var(--primary-hover);
+  color: #fff;
+}
+.hero-img {
+  max-height: 400px;
+  border-radius: 10px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* ------------------------------------
+   Browse Courses Section
+------------------------------------ */
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--primary-color);
+}
+.course-card {
+  background: var(--secondary-bg);
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  transition: 0.3s;
+}
+.course-card:hover {
+  background: var(--primary-color);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ------------------------------------
+   Top Tutors Section
+------------------------------------ */
+.tutor-card {
+  background: #fff;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  transition: 0.3s;
+}
+.tutor-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+.tutor-card h5 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+.tutor-card p {
+  color: var(--text-color);
+}
+.tutor-card:hover {
+  transform: scale(1.05);
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ------------------------------------
+   Responsive Adjustments
+------------------------------------ */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 40px 0;
+    background: #fff; /* Simplify or keep gradient if you prefer */
+  }
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-img {
+    max-height: 250px;
+  }
+  .course-card,
+  .tutor-card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Adjust card spacing for manage posts */
+.card {
+  margin-bottom: 1.5rem;
+}
+.card-header h5 {
+  margin-bottom: 0;
+}
+.card-body p {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+.card-footer {
+  padding: 0.75rem 1.25rem;
+}
