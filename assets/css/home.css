@@ -1,0 +1,341 @@
+/* Apply Inter font */
+body {
+  font-family: "Inter", sans-serif;
+}
+.navbar {
+  font-weight: 500;
+  background-color: #172147;
+}
+.navbar-brand,
+.nav-link {
+  font-weight: 500;
+  color: white;
+  padding: 0 1 0 16px;
+  gap: 10px;
+}
+/* Add more spacing between navbar items */
+.navbar-nav .nav-item {
+  margin-right: 20px; /* Adjust space between items */
+}
+/* Below Navbar Section */
+.secondary-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa; /* Light Gray Background */
+  border-bottom: 1px solid #ddd; /* Add border for separation */
+}
+
+/* Logo Styling */
+.logo img {
+  height: 50px; /* Adjust size */
+}
+
+/* Button Styling */
+.btn-auth {
+  margin-left: 10px; /* Space between buttons */
+}
+
+.custom-btn {
+  background-color: #d6bbea !important; /* Custom Purple Shade */
+  border-color: #d6bbea !important;
+  color: white !important; /* Ensures text is readable */
+}
+
+.custom-btn:hover {
+  background-color: #bfa0d8 !important; /* Slightly darker on hover */
+  border-color: #bfa0d8 !important;
+}
+
+.secondary-navbar {
+  background-color: #e9eaf0;
+}
+
+.custom-btn-create {
+  background-color: #172147;
+  color: white;
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+  background-color: #f8f9fa; /* Light Background */
+  height: auto;
+}
+
+.hero-left {
+  max-width: 50%; /* Left side - Text */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 150px;
+}
+
+.hero-right {
+  max-width: 45%; /* Right side - Image */
+}
+
+.hero-left h1 {
+  font-weight: 600;
+  font-size: 2.5rem; /* Larger text size */
+  margin-bottom: 30px;
+  line-height: 13px;
+}
+/* Apply styles to the second h1 */
+.hero-left h1:last-of-type {
+  margin-bottom: 50px;
+}
+
+.hero-left p {
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: #6c757d; /* Light gray color */
+  line-height: 13px;
+}
+
+.hero-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(
+    10% 0%,
+    100% 0%,
+    100% 100%,
+    0% 100%
+  ); /* Slanted cut from top-left and bottom-left */
+}
+
+.hero-section {
+  height: auto;
+}
+
+.mission-section {
+  text-align: center;
+  margin: 40px 0;
+  padding: 65px;
+}
+
+.mission-section h2 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 100px;
+}
+
+.mission-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap; /* Wrap cards on smaller screens */
+}
+
+.card {
+  background-color: #fff;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+}
+
+.cards {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  transition: transform 0.3s;
+}
+
+#left-card {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+#right-card {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.card p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.card-icon {
+  width: 80px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.highlight-card {
+  background: linear-gradient(135deg, #d6bbea, #172147);
+  color: white;
+  width: 27%;
+  border: none;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.highlight-card h3,
+.highlight-card p {
+  color: white;
+}
+
+.mission-cards .card:first-child,
+.mission-cards .card:last-child {
+  align-self: center;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.cards:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .mission-section {
+    padding: 20px;
+  }
+
+  .mission-section h2 {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+
+  .card,
+  .cards {
+    width: 100%; /* Make cards full width on small screens */
+    max-width: 300px; /* Limit max width */
+  }
+
+  .mission-cards {
+    flex-direction: column; /* Stack cards on top of each other */
+    align-items: center; /* Center cards horizontally */
+  }
+}
+
+.about-us-section {
+  display: flex;
+  padding: 65px;
+  justify-content: space-between;
+  align-items: center;
+  height: auto;
+}
+
+.about-us-section .left-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding-right: 20px;
+}
+
+.about-us-section .left-side img {
+  max-width: 100%;
+  height: auto;
+  background: none;
+}
+
+.about-us-section .right-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-us-section .main-heading {
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1.2;
+  color: #172147;
+}
+
+.about-us-section .orange-text {
+  color: #172147;
+}
+
+.about-us-section .subtext {
+  font-size: 16px;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  line-height: 1.95;
+}
+
+.about-us-section a {
+  text-decoration: none;
+  color: white;
+}
+
+.about-us-section .feature-button {
+  border-radius: 50px;
+  background-color: #172147;
+  color: white;
+  font-weight: bold;
+  width: 150px;
+  border: none;
+  padding: 10px 20px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.aboutustext {
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .about-us-section {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .about-us-section .left-side {
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .about-us-section .right-side {
+    padding-left: 0;
+  }
+
+  .about-us-section .main-heading {
+    font-size: 28px; /* Adjust font size for smaller screens */
+  }
+
+  .about-us-section .subtext {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  .aboutustext {
+    font-size: 30px; /* Adjust font size for smaller screens */
+  }
+}

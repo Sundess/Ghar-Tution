@@ -3,10 +3,11 @@
 if (session_status() === PHP_SESSION_NONE) { 
     session_start(); 
 }
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'parent') {
+if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['parent', 'admin'])) {
     header("Location: login.php");
     exit();
 }
+
 require_once 'config.php';
 
 $error = "";
@@ -43,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(empty($error)) {
         // Calculate the price using the same logic as in create_post.php
         function calculatePrice($type, $duration, $grade, $category) {
-            $basePrice = 10000;
+            $basePrice = 5000;
             $typeFactor = ($type == 'offline') ? 1.2 : 1.0;
             switch($grade) {
                 case "Grade 1-5": $gradeFactor = 1.0; break;

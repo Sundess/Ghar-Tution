@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <title>Ghar Tution</title>
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets\css\styles.css">
+    <link rel="stylesheet" href="assets\css\home.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="assets\css\styles.css">
-
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -20,7 +20,13 @@ if (session_status() === PHP_SESSION_NONE) {
 ?>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg" style="background-color: #172147;">
-        <a class="navbar-brand text-white" href="dashboard.php">Ghar Tuition</a>
+
+
+        <a class="navbar-brand text-white" href="index.php">
+            <div class="logo">
+                <img class="logo-img" src="assets/images/logo.png" alt="Logo"> <!-- Replace with your logo -->
+            </div>
+        </a>
         <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -40,4 +46,4 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="mt-4">

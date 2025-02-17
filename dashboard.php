@@ -18,166 +18,151 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 $first_name = $user ? $user['first_name'] : 'User';
 $role       = $user ? $user['role'] : 'parent';
 
-include 'includes/header.php';
+include 'includes/header.php'
 ?>
-
 
 <!-- Hero Section -->
 <div class="hero-section">
+    <!-- Left Side: Text -->
+    <div class="hero-left">
+        <h1 class="hero-title">Hello, <?php echo htmlspecialchars($first_name); ?>!</h1>
+        <p>Our mission is to help you to find the best tutors online </p>
+        <p>and learn with expert anytime, anywhere.</p>
+        <!-- Role-Based Actions -->
+        <div class="mt-1">
+            <?php if ($role == 'parent'): ?>
+            <a href="create_post.php" class="btn" style="background-color: #172147; color: white">Create Tuition
+                Post</a>
+            <a href="manage_posts.php" class="btn btn-secondary">See Your Posts</a>
+            <?php elseif ($role == 'tutor'): ?>
+            <a href="view_posts.php" class="btn btn-primary" style="background-color: #172147; color: white">View
+                Tuition Posts</a>
+            <a href="my_applications.php" class="btn btn-secondary">My Applications</a>
+            <?php elseif ($role == 'admin'): ?>
+            <a href="admin_pending_posts.php" class="btn btn-primary"
+                style="background-color: #172147; color: white">Review Pending Posts</a>
+            <a href="admin_applications.php" class="btn btn-secondary">View Applications</a>
+            <?php endif; ?>
+        </div>
+
+    </div>
+
+    <!-- Right Side: Image -->
+    <div class="hero-right">
+        <img src="assets/images/hero-image.png" alt="Hero Image"> <!-- Replace with your image -->
+    </div>
+</div>
+
+<!-- Mission Section -->
+<section class="mission-section">
+    <h2>Our Mission</h2>
+    <div class="mission-cards">
+        <!-- Card 1: Personalized Learning -->
+        <div id="left-card" class="card" onclick="">
+            <i class="fas fa-user-graduate fa-3x card-icon " style="color:rgb(249, 218, 218);padding-bottom: 10px;"></i>
+            <h3>Personalized Learning</h3>
+            <p>Offer tailored educational experiences to each student, ensuring they learn at their own pace and
+                according to their individual needs and strengths.</p>
+        </div>
+
+        <!-- Card 2: Affordable Education -->
+        <div class="cards highlight-card" onclick="">
+            <i class="fas fa-wallet fa-3x card-icon" style="padding-bottom: 10px;"></i>
+            <h3>Affordable Education</h3>
+            <p>Provide quality education that is accessible and affordable for all students, breaking down financial
+                barriers to learning opportunities.</p>
+        </div>
+
+        <!-- Card 3: Holistic Development -->
+        <div id="right-card" class="card" onclick="">
+            <i class="fas fa-brain fa-3x card-icon" style="color:rgb(204, 247, 208);padding-bottom: 10px;"></i>
+            <h3>Holistic Development</h3>
+            <p>Focus on the all-around development of students by integrating academic learning with life skills,
+                critical thinking, and emotional intelligence.</p>
+        </div>
+    </div>
+
+
+</section>
+
+<!-- About Us Section -->
+<section class="about-us-section">
+    <div class="left-side">
+        <img src="assets/images/tuition.png" alt="About Us Image" />
+    </div>
+    <div class="right-side">
+        <h1 class="main-heading">
+            <span class="orange-text">About Ghar Tuition</span>
+        </h1>
+        <h1 class="aboutustext">Empowering Students Through Personalized Learning</h1>
+        <p class="subtext">
+            At Ghar Tuition, we are committed to providing a personalized and affordable learning experience to
+            every student. Our experienced tutors are dedicated to helping students of all levels succeed
+            academically and develop essential life skills. Whether it’s through one-on-one tutoring or focused
+            group sessions, we aim to empower students to reach their full potential in a supportive and flexible
+            environment.
+        </p>
+        <button class="feature-button"><a href="#">Learn More</a></button>
+    </div>
+
+</section>
+<!-- About Us Section -->
+<section class="about-us-section">
+    <!-- Your existing About Us content here -->
+</section>
+
+
+<?php if ($role == 'parent'): ?>
+<!-- Become a Tutor Section -->
+<section class="become-tutor-section mt-5">
     <div class="container">
         <div class="row align-items-center">
-            <!-- Left Section: Greeting & CTA -->
-            <div class="col-md-6 text-left">
-                <h1 class="hero-title">Hello, <?php echo htmlspecialchars($first_name); ?>!</h1>
-                <p class="hero-subtext">
-                    Our mission is to help you find the best tutors online and learn with expert guidance anytime,
-                    anywhere.
-                </p>
-                <!-- "Search for Tutor" Button -->
-                <a href="view_posts.php" class="btn btn-primary search-tutor-btn">Search for Tutor</a>
+            <!-- Left Side: Tutor Card -->
+            <div class="col-md-6 mb-4">
+                <div class="p-4 d-flex flex-column justify-content-center h-100" style="
+                        background: linear-gradient(135deg, #6e47f7 0%, #b66bff 100%);
+                        border-radius: 1rem;
+                        color: #fff;
+                        position: relative;
+                    ">
+                    <h2 class="mb-3">Become a Tutor</h2>
+                    <p>
+                        Instructors from Nepal teach millions of students on Ghar Tuition.
+                        We provide the tools and skills to teach what you love.
+                    </p>
+                    <a href="register.php" class="btn btn-light align-self-start mt-3">Apply Now</a>
+                </div>
             </div>
 
-            <!-- Right Section: Image -->
-            <div class="col-md-6 text-center">
-                <!-- Replace 'tutor-student.png' with your own hero image -->
-                <img src="assets/images/tutor-student.png" alt="Tutor and Student" class="img-fluid hero-img">
+            <!-- Right Side: Teaching & Earning Steps -->
+            <div class="col-md-6">
+                <h3 class="mb-4">Your teaching & earning steps</h3>
+                <div class="d-flex flex-column gap-2">
+                    <div class="d-flex align-items-start mb-2">
+                        <div class="badge bg-primary me-3">1</div>
+                        <p class="mb-0">Apply to become a tutor</p>
+                    </div>
+                    <div class="d-flex align-items-start mb-2">
+                        <div class="badge bg-primary me-3">2</div>
+                        <p class="mb-0">Build & edit your profile</p>
+                    </div>
+                    <div class="d-flex align-items-start mb-2">
+                        <div class="badge bg-primary me-3">3</div>
+                        <p class="mb-0">Interview Process</p>
+                    </div>
+                    <div class="d-flex align-items-start">
+                        <div class="badge bg-primary me-3">4</div>
+                        <p class="mb-0">Start teaching & earning</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+<?php else: ?>
+<!-- Optionally add alternative content for non-parent users -->
+<?php endif; ?>
 
-<!-- Browse Top Courses Section -->
-<div class="container mt-5">
-    <h2 class="section-title">Browse Top Courses</h2>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="course-card">
-                <h5>SEE</h5>
-                <p>12,323 Courses</p>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="course-card">
-                <h5>BLE</h5>
-                <p>8,232 Courses</p>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="course-card">
-                <h5>IT & Software</h5>
-                <p>2,232 Courses</p>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="course-card">
-                <h5>Accounts</h5>
-                <p>1,232 Courses</p>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Top Tutors of the Month Section -->
-<div class="container mt-5">
-    <h2 class="section-title">Top Tutors of the Month</h2>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="tutor-card">
-                <img src="assets/images/tutor1.jpg" alt="Tutor 1">
-                <h5>Tutor Name 1</h5>
-                <p>Expert in Math & Science</p>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="tutor-card">
-                <img src="assets/images/tutor2.jpg" alt="Tutor 2">
-                <h5>Tutor Name 2</h5>
-                <p>Expert in Language & Arts</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Tutors Near You Section -->
-<div class="container mt-5">
-    <h2 class="section-title">Tutors Near You</h2>
-    <div class="row">
-        <!-- Example tutor card placeholders -->
-        <div class="col-md-3">
-            <div class="tutor-card">
-                <img src="assets/images/tutor3.jpg" alt="Tutor 3">
-                <h5>Tutor Name 3</h5>
-                <p>Near your location</p>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="tutor-card">
-                <img src="assets/images/tutor4.jpg" alt="Tutor 4">
-                <h5>Tutor Name 4</h5>
-                <p>Near your location</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Become a Tutor & Steps -->
-<div class="container mt-5 tutor-steps-section">
-    <div class="row">
-        <!-- Left Column: Become a Tutor -->
-        <div class="col-md-6 mb-3">
-            <div class="become-tutor-card">
-                <h3>Become a Tutor</h3>
-                <p>Instructors from Nepal reach millions of students on Ghar Tuition. We provide the tools and skills to
-                    teach what you love.</p>
-                <button class="become-tutor-btn">Apply Now</button>
-            </div>
-        </div>
-        <!-- Right Column: Teaching & Earning Steps -->
-        <div class="col-md-6">
-            <h4>Your teaching & earning steps</h4>
-            <div class="teaching-steps">
-                <ul>
-                    <li>Apply to become a tutor</li>
-                    <li>Build & edit your profile</li>
-                    <li>Interview Process</li>
-                    <li>Start teaching & earning</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bottom Stats Section -->
-<div class="bottom-stats-section mt-5">
-    <h2>Start learning with the best tutors anytime anywhere.</h2>
-    <div class="stats-cards">
-        <div class="stats-card">
-            <h3>6.3k</h3>
-            <span>Online Students</span>
-        </div>
-        <div class="stats-card">
-            <h3>26k</h3>
-            <span>Certified Tutors</span>
-        </div>
-        <div class="stats-card">
-            <h3>99.9%</h3>
-            <span>Success Rate</span>
-        </div>
-    </div>
-</div>
-
-<!-- Role-Based Actions -->
-<div class="container mt-5 text-center">
-    <?php if ($role == 'parent'): ?>
-    <a href="create_post.php" class="btn btn-primary">Create Tuition Post</a>
-    <a href="manage_posts.php" class="btn btn-secondary">Manage My Posts</a>
-    <?php elseif ($role == 'tutor'): ?>
-    <a href="view_posts.php" class="btn btn-primary">View Tuition Posts</a>
-    <a href="my_applications.php" class="btn btn-secondary">My Applications</a>
-    <?php elseif ($role == 'admin'): ?>
-    <a href="admin_pending_posts.php" class="btn btn-primary">Review Pending Posts</a>
-    <a href="admin_applications.php" class="btn btn-secondary">View Applications</a>
-    <?php endif; ?>
-</div>
 
 <?php include 'includes/footer.php'; ?>

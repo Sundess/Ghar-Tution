@@ -1,28 +1,32 @@
 </div> <!-- End container -->
-
+<style>
+.list-unstyled a {
+    text-decoration: none;
+}
+</style>
 <!-- Footer -->
-<footer class="bg-dark text-white mt-5 pt-5 pb-4">
+<footer class="text-white mt-5 pt-5 pb-4" style="background-color: #172147;">
     <div class="container">
         <div class="row">
             <!-- Left Column: Tagline & Stats -->
-            <div class="col-md-6 mb-4">
+            <div class="col-md-6 mb-8">
                 <h3 class="mb-3">Start learning with the best tutors anytime, anywhere.</h3>
-                <div class="d-flex mb-3">
+                <div class="d-flex mb-3" style="margin-top: 30px;">
                     <!-- Example CTA buttons -->
-                    <a href="#" class="btn btn-outline-light mr-2">Join The Family</a>
-                    <a href="#" class="btn btn-primary">Browse All Courses</a>
+                    <a href="#" class="btn btn-outline-light" style="margin-right: 35px;">Join The Family</a>
+                    <a href="#" class="btn btn-primary mr-">Browse All Courses</a>
                 </div>
-                <div class="d-flex text-center">
-                    <div class="mr-4">
-                        <h5 class="mb-0">6.3k</h5>
+                <div class="d-flex text-center" style="margin-bottom: 130px; margin-top: 35px;">
+                    <div class="mr-4 mb-4" style="margin-right: 13px;">
+                        <h5>6.3k</h5>
                         <small>Online Students</small>
                     </div>
-                    <div class="mr-4">
-                        <h5 class="mb-0">26k</h5>
+                    <div class="mr-40 mb-4" style="margin-right: 13px;">
+                        <h5>26k</h5>
                         <small>Certified Tutors</small>
                     </div>
                     <div>
-                        <h5 class="mb-0">99.9%</h5>
+                        <h5>99.9%</h5>
                         <small>Success Rate</small>
                     </div>
                 </div>
@@ -55,8 +59,10 @@
             <div class="col-md-2 mb-4">
                 <h5 class="mb-3">Download Our App</h5>
                 <!-- Replace with your own app store images/links -->
-                <a href="#"><img src="assets/images/app-store.png" alt="App Store" class="img-fluid mb-2"></a>
-                <a href="#"><img src="assets/images/play-store.png" alt="Play Store" class="img-fluid"></a>
+                <a href="#"><img src="assets/images/logo.png" alt="App Store" class="img-fluid"
+                        style="height: 30px; padding-right:15px"></a>
+                <a href="#"><img src="assets/images/logo.png" alt="Play Store" class="img-fluid"
+                        style="height: 30px;"></a>
             </div>
         </div>
 

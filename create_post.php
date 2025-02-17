@@ -19,7 +19,7 @@ if (isset($_SESSION['success_message'])) {
 $error = "";
 
 function calculatePrice($type, $duration, $grade, $category) {
-    $basePrice = 10000;
+    $basePrice = 5000;
     $typeFactor = ($type == 'offline') ? 1.2 : 1.0;
     switch ($grade) {
         case "Grade 1-5": $gradeFactor = 1.0; break;
