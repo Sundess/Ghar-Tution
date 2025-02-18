@@ -107,7 +107,7 @@ if (isset($_SESSION['user_id'])) {
     </div>
 
     <!-- Hero Section -->
-    <div class="hero-section">
+    <div class="hero-section" >
         <!-- Left Side: Text -->
         <div class="hero-left">
             <h1>Learn from tutors </h1>

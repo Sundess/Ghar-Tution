@@ -24,6 +24,11 @@ if($stmt->rowCount() > 0) {
 }
 include 'includes/header.php';
 ?>
-<div class="alert alert-info"><?php echo htmlspecialchars($message); ?></div>
+<div class="alert alert-info">
+<div class="no-posts-container" style="min-height: 600px; display: flex; align-items: center; justify-content: center;">
+<p class="text-center" style="font-weight: bold ;"><?php echo htmlspecialchars($message); ?></p>
+</div>
+
+</div>
 <a href="view_posts.php" class="btn btn-primary">Back to Tuition Posts</a>
 <?php include 'includes/footer.php'; ?>

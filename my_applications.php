@@ -15,7 +15,9 @@ include 'includes/header.php';
 ?>
 <h2 class="text-center">My Applications</h2>
 <?php if(empty($applications)): ?>
-<p>You have not applied to any tuition posts.</p>
+    <div class="no-posts-container" style="min-height: 600px; display: flex; align-items: center; justify-content: center;">
+    <p class="text-center" style="font-weight: bold ;">You have not applied to any tuition posts........</p>
+</div>
 <?php else: ?>
 <div class="posts-container">
     <?php foreach($applications as $app): ?>

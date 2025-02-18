@@ -13,7 +13,9 @@ include 'includes/header.php';
 ?>
 <h2 class="text-center">Available Tuition Posts</h2>
 <?php if(empty($posts)): ?>
-<p>No tuition posts available at the moment.</p>
+    <div class="no-posts-container" style="min-height: 600px; display: flex; align-items: center; justify-content: center;">
+    <p class="text-center" style="font-weight: bold ;">No tuition posts available at the moment........</p>
+</div>
 <?php else: ?>
 <div class="posts-container">
     <?php foreach($posts as $post): ?>
