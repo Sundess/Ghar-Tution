@@ -55,12 +55,12 @@ foreach ($rows as $row) {
 <div class="my-4">
     <ul class="nav nav-tabs" id="viewTabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="default-view-tab" data-toggle="tab" href="#defaultView" role="tab"
-                aria-controls="defaultView" aria-selected="true">All Applications</a>
+            <a style="color: black" class="nav-link active" id="default-view-tab" data-toggle="tab" href="#defaultView"
+                role="tab" aria-controls="defaultView" aria-selected="true">All Applications</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="approved-view-tab" data-toggle="tab" href="#approvedView" role="tab"
-                aria-controls="approvedView" aria-selected="false">Approved Tutors</a>
+            <a style="color: black" class="nav-link" id="approved-view-tab" data-toggle="tab" href="#approvedView"
+                role="tab" aria-controls="approvedView" aria-selected="false">Approved Tutors</a>
         </li>
     </ul>
     <div class="tab-content" id="viewTabsContent">
