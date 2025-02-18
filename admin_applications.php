@@ -52,7 +52,7 @@ foreach ($rows as $row) {
 ?>
 
 <!-- Tabs to switch between views -->
-<div class="my-4">
+<div class="my-4" style="min-height: 600px;">
     <ul class="nav nav-tabs" id="viewTabs" role="tablist">
         <li class="nav-item">
             <a style="color: black" class="nav-link active" id="default-view-tab" data-toggle="tab" href="#defaultView"
