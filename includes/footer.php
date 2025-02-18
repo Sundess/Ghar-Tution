@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <!-- Left Column: Tagline & Stats -->
-            <div class="col-md-6 mb-8">
+            <div class="col-md-6 mb-1">
                 <h3 class="mb-3">Start learning with the best tutors anytime, anywhere.</h3>
                 <div class="d-flex mb-3" style="margin-top: 30px;">
                     <!-- Example CTA buttons -->
@@ -17,11 +17,11 @@
                     <a href="#" class="btn btn-primary mr-">Browse All Courses</a>
                 </div>
                 <div class="d-flex text-center" style="margin-bottom: 130px; margin-top: 35px;">
-                    <div class="mr-4 mb-4" style="margin-right: 13px;">
+                    <div class="mr-4 mb-2" style="margin-right: 13px;">
                         <h5>6.3k</h5>
                         <small>Online Students</small>
                     </div>
-                    <div class="mr-40 mb-4" style="margin-right: 13px;">
+                    <div class="mr-40 mb-2" style="margin-right: 13px;">
                         <h5>26k</h5>
                         <small>Certified Tutors</small>
                     </div>
@@ -33,7 +33,7 @@
             </div>
 
             <!-- Middle Column: Top Category -->
-            <div class="col-md-2 mb-4">
+            <div class="col-md-2 mb-2">
                 <h5 class="mb-3">Top Category</h5>
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-white-50">SEE</a></li>
@@ -43,7 +43,7 @@
             </div>
 
             <!-- Middle Column: Quick Links -->
-            <div class="col-md-2 mb-4">
+            <div class="col-md-2 mb-2">
                 <h5 class="mb-3">Quick Links</h5>
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-white-50">Help Center</a></li>
@@ -56,7 +56,7 @@
             </div>
 
             <!-- Right Column: Download App -->
-            <div class="col-md-2 mb-4">
+            <div class="col-md-2 mb-2">
                 <h5 class="mb-3">Download Our App</h5>
                 <!-- Replace with your own app store images/links -->
                 <a href="#"><img src="assets/images/logo.png" alt="App Store" class="img-fluid"

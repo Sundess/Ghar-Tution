@@ -47,7 +47,7 @@ body {
 
 /* Card section for manage_post */ /* Card section for manage_posts */
 .posts-container {
-  font-family: "Muli", sans-serif;
+
 }
 
 .post-card {
@@ -62,10 +62,12 @@ body {
 }
 
 .post-card h6 {
-  opacity: 0.6;
+  /* opacity: 0.6; */
   margin: 0;
   letter-spacing: 1px;
   margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #172147;
 }
 
 .post-card h2 {
@@ -75,7 +77,11 @@ body {
 }
 
 .post-card h5 {
-  font-size: 1.25rem;
+  font-weight: 400;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  line-height: 1.45;
+
 }
 
 .post-preview {
@@ -116,6 +122,7 @@ body {
 
 .info-paragraphs p {
   margin: 0;
+  line-height: 1.75rem;
 }
 
 .post-line-top {

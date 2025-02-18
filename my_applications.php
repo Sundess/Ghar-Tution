@@ -19,7 +19,7 @@ include 'includes/header.php';
     <p class="text-center" style="font-weight: bold ;">You have not applied to any tuition posts........</p>
 </div>
 <?php else: ?>
-<div class="posts-container">
+<div class="posts-container" style="min-height: 600px;">
     <?php foreach($applications as $app): ?>
     <div class="post-card post-line-top">
         <div class="post-preview2">

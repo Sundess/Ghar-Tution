@@ -23,16 +23,16 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 <!-- <p>You have not created any tuition posts yet.</p> -->
 <?php else: ?>
-<div class="posts-container">
+<div class="posts-container" style="min-height: 600px;">
     <?php foreach ($posts as $post): ?>
-    <div class="post-card post-line-top">
+    <div class="post-card post-line-top" style="min-height: 600px;">
         <div class="post-preview">
             <h6><?php echo htmlspecialchars($post['post_date']); ?></h6>
             <h2><?php echo htmlspecialchars($post['title']); ?></h2>
         </div>
         <div class="post-info">
             <h6>Price Nrs. <?php echo htmlspecialchars($post['price']); ?></h6>
-            <h5><?php echo nl2br(htmlspecialchars($post['description'])); ?></h5>
+            <h5 class="mb-20"><?php echo nl2br(htmlspecialchars($post['description'])); ?></h5>
 
             <div class="info-paragraphs">
                 <p><strong>Type:</strong> <?php echo htmlspecialchars($post['tuition_type']); ?></p>
