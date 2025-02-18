@@ -10,8 +10,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
 require_once 'config.php';
 include 'includes/header.php';
 
+// Updated query: also fetch the application status (as app_status)
 $sql = "SELECT tp.id AS post_id, tp.title, tp.description, tp.post_date, 
-               a.id AS application_id, a.applied_at, 
+               a.id AS application_id, a.applied_at, a.status AS app_status, 
                t.first_name, t.last_name, t.email, t.cv, t.phone_number, t.tutor_location, t.profile_picture
         FROM tuition_posts tp
         LEFT JOIN applications a ON tp.id = a.post_id
@@ -21,22 +22,24 @@ $sql = "SELECT tp.id AS post_id, tp.title, tp.description, tp.post_date,
 $stmt = $pdo->query($sql);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Build an array of posts with applications
 $posts = [];
-foreach($rows as $row) {
+foreach ($rows as $row) {
     $pid = $row['post_id'];
     if (!isset($posts[$pid])) {
         $posts[$pid] = [
-            'post_id'    => $pid,
-            'title'      => $row['title'],
-            'description'=> $row['description'],
-            'post_date'  => $row['post_date'],
-            'applications' => []
+            'post_id'     => $pid,
+            'title'       => $row['title'],
+            'description' => $row['description'],
+            'post_date'   => $row['post_date'],
+            'applications'=> []
         ];
     }
     if (!empty($row['application_id'])) {
         $posts[$pid]['applications'][] = [
             'application_id' => $row['application_id'],
             'applied_at'     => $row['applied_at'],
+            'app_status'     => $row['app_status'],
             'tutor_name'     => $row['first_name'] . " " . $row['last_name'],
             'tutor_email'    => $row['email'],
             'cv'             => $row['cv'],
@@ -47,144 +50,189 @@ foreach($rows as $row) {
     }
 }
 ?>
-<!-- Inline styles -->
-<style>
-table {
-    width: 100%;
-}
 
-.table td,
-.table th {
-    vertical-align: middle;
-    white-space: normal;
-    word-wrap: break-word;
-}
+<!-- Tabs to switch between views -->
+<div class="my-4">
+    <ul class="nav nav-tabs" id="viewTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="default-view-tab" data-toggle="tab" href="#defaultView" role="tab"
+                aria-controls="defaultView" aria-selected="true">All Applications</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="approved-view-tab" data-toggle="tab" href="#approvedView" role="tab"
+                aria-controls="approvedView" aria-selected="false">Approved Tutors</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="viewTabsContent">
+        <!-- Default View: Table of All Applications (only tuition posts that have not found an approved tutor) -->
+        <div class="tab-pane fade show active" id="defaultView" role="tabpanel" aria-labelledby="default-view-tab">
+            <div class="m-4">
+                <table class="table align-middle table-responsive">
+                    <colgroup>
+                        <col style="width: 35%" />
+                        <col style="width: 20%" />
+                        <col style="width: 20%" />
+                        <col style="width: 15%" />
+                        <col style="width: 5%" />
+                        <col style="width: 5%" />
+                    </colgroup>
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Tuition Title</th>
+                            <th scope="col">Teacher Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">CV</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if(empty($posts)): ?>
+                        <tr>
+                            <td colspan="6">No posts found.</td>
+                        </tr>
+                        <?php else: ?>
+                        <?php foreach($posts as $post): ?>
+                        <?php
+                            // Check if the post has any approved tutor application.
+                            $hasApproved = false;
+                            foreach($post['applications'] as $app) {
+                                if(isset($app['app_status']) && $app['app_status'] === 'accepted'){
+                                    $hasApproved = true;
+                                    break;
+                                }
+                            }
+                            // Only display posts that have NOT found an approved tutor.
+                            if($hasApproved){
+                                continue;
+                            }
+                            $numApps = count($post['applications']);
+                        ?>
+                        <?php if($numApps == 0): ?>
+                        <tr>
+                            <td class="tution-title">
+                                <p><?php echo htmlspecialchars($post['title']); ?></p>
+                                <span class="job-subtitle">Posted on:
+                                    <?php echo htmlspecialchars($post['post_date']); ?></span>
+                            </td>
+                            <td colspan="5">No applications for this post.</td>
+                        </tr>
+                        <?php else: ?>
+                        <?php $first = true; ?>
+                        <?php foreach($post['applications'] as $app): ?>
+                        <tr>
+                            <?php if($first): ?>
+                            <td class="tution-title" rowspan="<?php echo $numApps; ?>">
+                                <p><?php echo htmlspecialchars($post['title']); ?></p>
+                                <span class="job-subtitle">Posted on:
+                                    <?php echo htmlspecialchars($post['post_date']); ?></span>
+                            </td>
+                            <?php $first = false; endif; ?>
+                            <td>
+                                <div class="job-title"><?php echo htmlspecialchars($app['tutor_name']); ?></div>
+                                <div class="job-subtitle"><?php echo htmlspecialchars($app['applied_at']); ?> &bull;
+                                    <?php echo htmlspecialchars($app['tutor_location']); ?></div>
+                            </td>
+                            <td><?php echo htmlspecialchars($app['tutor_email']); ?></td>
+                            <td><?php echo htmlspecialchars($app['phone_number']); ?></td>
+                            <td>
+                                <a href="<?php echo htmlspecialchars($app['cv']); ?>" target="_blank"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <!-- Approve button -->
+                                    <a href="approve_application.php?id=<?php echo $app['application_id']; ?>"
+                                        class="btn btn-success btn-sm" title="Approve">
+                                        <i class="fas fa-check"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-.table th {
-    font-weight: 600;
-    font-size: 1.5rem;
-}
-
-.table td {
-    font-size: 1.25rem;
-}
-
-.job-title {
-    font-weight: 600;
-    margin-bottom: 0;
-}
-
-.job-subtitle {
-    color: #6c757d;
-    font-size: 0.85rem;
-    margin-bottom: 0;
-}
-
-/* Clamp the Tuition Title to 2 lines */
-.tution-title p {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 0.25rem;
-    font-size: 1.3rem;
-}
-
-.tution-title .job-subtitle {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-</style>
-
-<h2 class="text-center">Tuition Posts and Tutor Applications</h2>
-
-<div class="m-4">
-    <table class="table align-middle table-responsive">
-        <colgroup>
-            <col style="width: 35%" />
-            <col style="width: 20%" />
-            <col style="width: 20%" />
-            <col style="width: 15%" />
-            <col style="width: 5%" />
-            <col style="width: 5%" />
-        </colgroup>
-        <thead class="table-light">
-            <tr>
-                <th scope="col">Tuition Title</th>
-                <th scope="col">Teacher Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone Number</th>
-                <th scope="col">CV</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if(empty($posts)): ?>
-            <tr>
-                <td colspan="6">No posts found.</td>
-            </tr>
-            <?php else: ?>
-            <?php foreach($posts as $post): ?>
-            <?php $numApps = count($post['applications']); ?>
-            <?php if($numApps == 0): ?>
-            <tr>
-                <td class="tution-title">
-                    <p><?php echo htmlspecialchars($post['title']); ?></p>
-                    <span class="job-subtitle">Posted on: <?php echo htmlspecialchars($post['post_date']); ?></span>
-                </td>
-                <td colspan="5">No applications for this post.</td>
-            </tr>
-            <?php else: ?>
-            <?php $first = true; ?>
-            <?php foreach($post['applications'] as $app): ?>
-            <tr>
-                <?php if($first): ?>
-                <td class="tution-title" rowspan="<?php echo $numApps; ?>">
-                    <p><?php echo htmlspecialchars($post['title']); ?></p>
-                    <span class="job-subtitle">Posted on: <?php echo htmlspecialchars($post['post_date']); ?></span>
-                </td>
-                <?php $first = false; endif; ?>
-                <td>
-                    <div class="job-title"><?php echo htmlspecialchars($app['tutor_name']); ?></div>
-                    <div class="job-subtitle"><?php echo htmlspecialchars($app['applied_at']); ?> &bull;
-                        <?php echo htmlspecialchars($app['tutor_location']); ?></div>
-                </td>
-                <td><?php echo htmlspecialchars($app['tutor_email']); ?></td>
-                <td><?php echo htmlspecialchars($app['phone_number']); ?></td>
-                <td>
-                    <a href="<?php echo htmlspecialchars($app['cv']); ?>" target="_blank"
-                        class="btn btn-primary btn-sm">
-                        <i class="fa fa-eye"></i>
-                    </a>
-                </td>
-                <td>
-                    <div class="btn-group" role="group">
-                        <!-- Edit button -->
-                        <a href="edit_post.php?id=<?php echo $app['application_id']; ?>"
-                            class="btn btn-outline-primary btn-sm" title="Edit">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <!-- Delete button triggers modal confirmation -->
-                        <button class="btn btn-danger btn-sm delete-application"
-                            data-id="<?php echo $app['application_id']; ?>" title="Delete">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-            <?php endif; ?>
-            <?php endforeach; ?>
-            <?php endif; ?>
-        </tbody>
-    </table>
+        <!-- Approved Tutors View: Table of Approved Applications Only (without Actions column) -->
+        <div class="tab-pane fade" id="approvedView" role="tabpanel" aria-labelledby="approved-view-tab">
+            <div class="m-4">
+                <table class="table align-middle table-responsive">
+                    <colgroup>
+                        <col style="width: 40%" />
+                        <col style="width: 20%" />
+                        <col style="width: 20%" />
+                        <col style="width: 15%" />
+                        <col style="width: 5%" />
+                    </colgroup>
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Tuition Title</th>
+                            <th scope="col">Teacher Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">CV</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $foundApproved = false;
+                        foreach ($posts as $post):
+                            // Filter approved applications
+                            $approvedApps = array_filter($post['applications'], function($app) {
+                                return (isset($app['app_status']) && $app['app_status'] === 'accepted');
+                            });
+                            $numApproved = count($approvedApps);
+                            if ($numApproved == 0) {
+                                continue;
+                            }
+                            $foundApproved = true;
+                        ?>
+                        <?php $first = true; ?>
+                        <?php foreach ($approvedApps as $app): ?>
+                        <tr>
+                            <?php if ($first): ?>
+                            <td class="tution-title" rowspan="<?php echo $numApproved; ?>">
+                                <p><?php echo htmlspecialchars($post['title']); ?></p>
+                                <span class="job-subtitle">Posted on:
+                                    <?php echo htmlspecialchars($post['post_date']); ?></span>
+                            </td>
+                            <?php $first = false; endif; ?>
+                            <td>
+                                <div class="job-title"><?php echo htmlspecialchars($app['tutor_name']); ?></div>
+                                <div class="job-subtitle"><?php echo htmlspecialchars($app['applied_at']); ?> &bull;
+                                    <?php echo htmlspecialchars($app['tutor_location']); ?></div>
+                            </td>
+                            <td><?php echo htmlspecialchars($app['tutor_email']); ?></td>
+                            <td><?php echo htmlspecialchars($app['phone_number']); ?></td>
+                            <td>
+                                <a href="<?php echo htmlspecialchars($app['cv']); ?>" target="_blank"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                        <?php endforeach; ?>
+                        <?php if (!$foundApproved): ?>
+                        <tr>
+                            <td colspan="5" class="text-center">No approved tutor found for any post.</td>
+                        </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- Custom Bootstrap Modal for Delete Confirmation (Centered) -->
+<!-- Custom Bootstrap Modal for Delete Confirmation (if needed) -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -206,7 +254,6 @@ table {
     </div>
 </div>
 
-<!-- jQuery and Bootstrap JS should be loaded in your header or footer -->
 <script>
 var applicationIdToDelete = null;
 var rowToDelete = null;
