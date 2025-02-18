@@ -31,16 +31,16 @@ include 'includes/header.php'
         <!-- Role-Based Actions -->
         <div class="mt-1">
             <?php if ($role == 'parent'): ?>
-            <a href="create_post.php" class="btn" style="background-color: #172147; color: white">Create Tuition
+            <a href="create_post.php" class="btn" style="background-color: #172147; color: white; margin-right:13px; margin-top:15px">Create Tuition
                 Post</a>
-            <a href="manage_posts.php" class="btn btn-secondary">See Your Posts</a>
+            <a href="manage_posts.php" class="btn btn-secondary" style="margin-top:15px;">See Your Posts</a>
             <?php elseif ($role == 'tutor'): ?>
-            <a href="view_posts.php" class="btn btn-primary" style="background-color: #172147; color: white">View
+            <a href="view_posts.php" class="btn btn-primary" style="background-color: #172147; color: white; ">View
                 Tuition Posts</a>
             <a href="my_applications.php" class="btn btn-secondary">My Applications</a>
             <?php elseif ($role == 'admin'): ?>
             <a href="admin_pending_posts.php" class="btn btn-primary"
-                style="background-color: #172147; color: white">Review Pending Posts</a>
+                style="background-color: #172147; color: white;">Review Pending Posts</a>
             <a href="admin_applications.php" class="btn btn-secondary">View Applications</a>
             <?php endif; ?>
         </div>
@@ -118,7 +118,7 @@ include 'includes/header.php'
     <div class="container">
         <div class="row align-items-center">
             <!-- Left Side: Tutor Card -->
-            <div class="col-md-6 mb-4">
+            <div class="col-md-6 mb-4" style="margin-left: -50px;">
                 <div class="p-4 d-flex flex-column justify-content-center h-100" style="
                         background: linear-gradient(135deg, #6e47f7 0%, #b66bff 100%);
                         border-radius: 1rem;
@@ -135,23 +135,23 @@ include 'includes/header.php'
             </div>
 
             <!-- Right Side: Teaching & Earning Steps -->
-            <div class="col-md-6">
+            <div class="col-md-6" style="padding-left: -40px;">
                 <h3 class="mb-4">Your teaching & earning steps</h3>
                 <div class="d-flex flex-column gap-2">
                     <div class="d-flex align-items-start mb-2">
-                        <div class="badge bg-primary me-3">1</div>
+                        <div class="badge bg-primary me-3" style="margin-right: 10px;">1</div>
                         <p class="mb-0">Apply to become a tutor</p>
                     </div>
                     <div class="d-flex align-items-start mb-2">
-                        <div class="badge bg-primary me-3">2</div>
+                        <div class="badge bg-primary me-3" style="margin-right: 10px;">2</div>
                         <p class="mb-0">Build & edit your profile</p>
                     </div>
                     <div class="d-flex align-items-start mb-2">
-                        <div class="badge bg-primary me-3">3</div>
+                        <div class="badge bg-primary me-3" style="margin-right: 10px;">3</div>
                         <p class="mb-0">Interview Process</p>
                     </div>
                     <div class="d-flex align-items-start">
-                        <div class="badge bg-primary me-3">4</div>
+                        <div class="badge bg-primary me-3" style="margin-right: 10px;">4</div>
                         <p class="mb-0">Start teaching & earning</p>
                     </div>
                 </div>

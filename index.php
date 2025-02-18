@@ -182,34 +182,31 @@ if (isset($_SESSION['user_id'])) {
     </section>
 
     <!-- Become a Tutor Section -->
-    <section class="become-tutor-section mt-5">
+    <section class="become-tutor-section mt-1 mb-5">
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row align-items-center justify-content-center" style="margin-left: 30px; margin-bottom: 110px;">
                 <!-- Left Side: Tutor Card -->
-                <div class="col-md-6 mb-4">
-                    <div class="p-4 d-flex flex-column justify-content-center h-100" style="
-            background: linear-gradient(135deg, #6e47f7 0%, #b66bff 100%);
-            border-radius: 1rem;
-            color: #fff;
-            position: relative;
-          ">
-                        <!-- (Optional) If you have an image of the person pointing, place it as a background or absolutely positioned element. 
-               Example with background image (replace 'Media/tutor-image.png' with your own):
-               background: linear-gradient(135deg, #6e47f7 0%, #b66bff 100%), 
-               url('Media/tutor-image.png') no-repeat right bottom / contain;
-          -->
-
-                        <h2 class="mb-3">Become a Tutor</h2>
-                        <p>
-                            Instructors from Nepal teach millions of students on Ghar Tuition.
-                            We provide the tools and skills to teach what you love.
-                        </p>
-                        <a href="register.php" class="btn btn-light align-self-start mt-3">Apply Now</a>
+                <div class="col-md-5 mb-4">
+                    <div class="tutor-card">
+                        <div class="text-content">
+                            <h2 class="mb-3">Become a Tutor</h2>
+                            <p>
+                                Instructors from Nepal teach millions of students on Ghar Tuition.
+                                We provide the tools and skills to teach what you love.
+                            </p>
+                            <a href="register.php" class="btn btn-light align-self-start mt-3">Apply Now</a>
+                        </div>
+                        <div class="image-content">
+                            <img src="assets/images/tutor.png" alt="">
+                        </div>
                     </div>
                 </div>
 
+                
+
+                
                 <!-- Right Side: Teaching & Earning Steps -->
-                <div class="col-md-6">
+                <div class="col-md-6" style="margin-left: 100px;">
                     <h3 class="mb-4">Your teaching & earning steps</h3>
                     <div class="d-flex flex-column gap-2">
                         <div class="d-flex align-items-start mb-2">
