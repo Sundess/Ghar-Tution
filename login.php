@@ -34,18 +34,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-include 'includes/header.php';
+include 'includes/link.php';
 ?>
-
-<!-- Custom container to center the login form vertically -->
-<div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
-    <div class="p-4" style="max-width: 400px; width: 100%;">
-        <!-- Optional Logo or Heading -->
+<style>
+    form label{
+        font-weight: bold;
+    }
+</style>
+<!-- Custom container to center the login form vertically, but split logo and form -->
+<div class="d-flex align-items-center justify-content-center" style="min-height: 90vh;">
+    <!-- Logo Section (Left side) -->
+    <div class="p-4" style="max-width: 350px; width: 100%; margin-top: 100px; margin-left: -100px; margin-right: 150px;">
         <div class="text-center mb-4">
-            <img src="assets/images/logo.png" alt="GHAR TUITION" style="width: 200px;" class="mb-2">
-            <!-- <h3 class="mb-0">GHAR TUITION</h3> -->
+            <img src="assets/images/logo2.png" alt="GHAR TUITION" style="width: 300px;" class="mb-2">
         </div>
+    </div>
 
+    <!-- Form Section (Right side) -->
+    <div class="p-4" style="max-width: 500px; width: 200%; margin-top: 100px;">
         <?php if (!empty($error)): ?>
         <div class="alert alert-danger text-center">
             <?php echo htmlspecialchars($error); ?>
@@ -53,6 +59,7 @@ include 'includes/header.php';
         <?php endif; ?>
 
         <form method="post" action="" novalidate>
+            <h1 style="font-weight: bold; margin-bottom:40px; text-align:center;">Log in Your Account</h1>
             <div class="form-group">
                 <label for="email">Email Address / Username</label>
                 <input type="email" name="email" id="email" class="form-control" required placeholder="Enter your email"
@@ -69,11 +76,9 @@ include 'includes/header.php';
                     <input type="checkbox" name="remember" class="form-check-input" id="remember">
                     <label class="form-check-label" for="remember">Remember me</label>
                 </div>
-                <!-- Uncomment or link appropriately if you have a forgot_password page -->
-                <!-- <a href="forgot_password.php">Forgot Password?</a> -->
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block" style="background-color: #172147;">Sign In</button>
         </form>
 
         <div class="text-center mt-3">
@@ -81,5 +86,3 @@ include 'includes/header.php';
         </div>
     </div>
 </div>
-
-<?php include 'includes/footer.php'; ?>

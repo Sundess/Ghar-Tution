@@ -70,132 +70,123 @@ include 'includes/header.php';
 ?>
 
 <div class="container mt-4">
-    <div class="p-4" style="max-width: 800px; margin: auto;">
-        <h2 class="text-center mb-4" style="color: #172147;">Create Tuition Post</h2>
-
-        <?php 
-        if (!empty($success_message)) {
-            echo '<div class="alert alert-success text-center">' . htmlspecialchars($success_message) . '</div>';
-        }
-        if (!empty($error)) {
-            echo '<div class="alert alert-danger text-center">' . htmlspecialchars($error) . '</div>';
-        }
-        ?>
-
-        <form method="post" action="" novalidate>
-            <!-- Row 1: Title (full width) -->
-            <div class="form-group">
-                <label>Title:</label>
-                <input type="text" name="title" class="form-control" required
-                    value="<?php echo isset($error) && !empty($error) ? htmlspecialchars($_POST['title']) : ''; ?>">
+    <div class="row">
+        <!-- Left Column: Welcome Text -->
+        <div class="col-md-4">
+            <div class="p-4" style=""; margin-top:20px; ">
+                <h2 style="color: #172147; font-weight:bold; margin-bottom:30px">Welcome!</h2>
+                <p style="line-height: 35px;">
+                    This page allows you to create a tuition post to find the perfect tutor for your child. Whether you need online or in-person tutoring, you can specify your preferences, such as grade level, subjects, class timings, and duration.
+                </p >
+                <p style="line-height: 35px;">
+                    Simply fill in the details, and qualified tutors will reach out to help your child succeed. Start now and give your child the best learning experience!
+                </p>
+                <img src="assets/images/welcome.png" alt="" style="height: 500px; margin-left: -215px; margin-top: -70px;">
             </div>
+        </div>
+        <!-- Right Column: Create Post Form -->
+        <div class="col-md-8" style="">
+            <div class="p-3" style="margin-left: 100px;">
+                <h2 class="text-center mb-4" style="color: #172147; font-weight:bold">Create Tuition Post</h2>
 
-            <!-- Row 2: Description (full width) -->
-            <div class="form-group">
-                <label>Description:</label>
-                <textarea name="description" class="form-control"
-                    required><?php echo isset($error) && !empty($error) ? htmlspecialchars($_POST['description']) : ''; ?></textarea>
+                <?php 
+                if (!empty($success_message)) {
+                    echo '<div class="alert alert-success text-center">' . htmlspecialchars($success_message) . '</div>';
+                }
+                if (!empty($error)) {
+                    echo '<div class="alert alert-danger text-center">' . htmlspecialchars($error) . '</div>';
+                }
+                ?>
+
+                <form method="post" action="" novalidate>
+                    <!-- Row 1: Title (full width) -->
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" name="title" class="form-control" required
+                            value="<?php echo isset($error) && !empty($error) ? htmlspecialchars($_POST['title']) : ''; ?>">
+                    </div>
+
+                    <!-- Row 2: Description (full width) -->
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea name="description" class="form-control" required><?php echo isset($error) && !empty($error) ? htmlspecialchars($_POST['description']) : ''; ?></textarea>
+                    </div>
+
+                    <!-- Row 3: Two Columns -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Type of Tuition:</label>
+                                <select name="tuition_type" class="form-control" required>
+                                    <option value="online" <?php echo (isset($_POST['tuition_type']) && $_POST['tuition_type']=='online') ? 'selected' : ''; ?>>Online</option>
+                                    <option value="offline" <?php echo (isset($_POST['tuition_type']) && $_POST['tuition_type']=='offline') ? 'selected' : ''; ?>>Offline</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Gender Preferred:</label>
+                                <select name="gender_preferred" class="form-control" required>
+                                    <option value="any" <?php echo (isset($_POST['gender_preferred']) && $_POST['gender_preferred']=='any') ? 'selected' : ''; ?>>Any</option>
+                                    <option value="male" <?php echo (isset($_POST['gender_preferred']) && $_POST['gender_preferred']=='male') ? 'selected' : ''; ?>>Male</option>
+                                    <option value="female" <?php echo (isset($_POST['gender_preferred']) && $_POST['gender_preferred']=='female') ? 'selected' : ''; ?>>Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Grade:</label>
+                                <select name="grade" class="form-control" required>
+                                    <option value="Grade 1-5" <?php echo (isset($_POST['grade']) && $_POST['grade']=='Grade 1-5') ? 'selected' : ''; ?>>Grade 1-5</option>
+                                    <option value="Grade 5-8" <?php echo (isset($_POST['grade']) && $_POST['grade']=='Grade 5-8') ? 'selected' : ''; ?>>Grade 5-8</option>
+                                    <option value="Grade 9-10" <?php echo (isset($_POST['grade']) && $_POST['grade']=='Grade 9-10') ? 'selected' : ''; ?>>Grade 9-10</option>
+                                    <option value="+2" <?php echo (isset($_POST['grade']) && $_POST['grade']=='+2') ? 'selected' : ''; ?>>+2</option>
+                                    <option value="Bachelors" <?php echo (isset($_POST['grade']) && $_POST['grade']=='Bachelors') ? 'selected' : ''; ?>>Bachelors</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Subjects:</label>
+                                <input type="text" name="subjects" class="form-control" required
+                                    value="<?php echo isset($_POST['subjects']) ? htmlspecialchars($_POST['subjects']) : ''; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label>Category:</label>
+                                <select name="category" class="form-control" required>
+                                    <option value="For 3 months" <?php echo (isset($_POST['category']) && $_POST['category']=='For 3 months') ? 'selected' : ''; ?>>For 3 months</option>
+                                    <option value="For exam only" <?php echo (isset($_POST['category']) && $_POST['category']=='For exam only') ? 'selected' : ''; ?>>For exam only</option>
+                                    <option value="For whole year" <?php echo (isset($_POST['category']) && $_POST['category']=='For whole year') ? 'selected' : ''; ?>>For whole year</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Two Columns for Timing -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Class Start Time (e.g., 5 PM):</label>
+                                <input type="text" name="class_start_time" class="form-control" required
+                                    value="<?php echo isset($_POST['class_start_time']) ? htmlspecialchars($_POST['class_start_time']) : ''; ?>">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Class Duration (in hours):</label>
+                                <input type="number" name="class_duration" class="form-control" required min="1"
+                                    value="<?php echo isset($_POST['class_duration']) ? htmlspecialchars($_POST['class_duration']) : ''; ?>">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 5: Full Width for Number of Students -->
+                    <div class="form-group">
+                        <label>Number of Students:</label>
+                        <input type="number" name="no_of_students" class="form-control" required min="1"
+                            value="<?php echo isset($_POST['no_of_students']) ? htmlspecialchars($_POST['no_of_students']) : ''; ?>">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" style="background-color: #172147; margin-top:60px">Add Post</button>
+                </form>
             </div>
-
-            <!-- Row 3: Two Columns -->
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Type of Tuition:</label>
-                        <select name="tuition_type" class="form-control" required>
-                            <option value="online"
-                                <?php echo (isset($_POST['tuition_type']) && $_POST['tuition_type']=='online') ? 'selected' : ''; ?>>
-                                Online</option>
-                            <option value="offline"
-                                <?php echo (isset($_POST['tuition_type']) && $_POST['tuition_type']=='offline') ? 'selected' : ''; ?>>
-                                Offline</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Gender Preferred:</label>
-                        <select name="gender_preferred" class="form-control" required>
-                            <option value="any"
-                                <?php echo (isset($_POST['gender_preferred']) && $_POST['gender_preferred']=='any') ? 'selected' : ''; ?>>
-                                Any</option>
-                            <option value="male"
-                                <?php echo (isset($_POST['gender_preferred']) && $_POST['gender_preferred']=='male') ? 'selected' : ''; ?>>
-                                Male</option>
-                            <option value="female"
-                                <?php echo (isset($_POST['gender_preferred']) && $_POST['gender_preferred']=='female') ? 'selected' : ''; ?>>
-                                Female</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Grade:</label>
-                        <select name="grade" class="form-control" required>
-                            <option value="Grade 1-5"
-                                <?php echo (isset($_POST['grade']) && $_POST['grade']=='Grade 1-5') ? 'selected' : ''; ?>>
-                                Grade 1-5</option>
-                            <option value="Grade 5-8"
-                                <?php echo (isset($_POST['grade']) && $_POST['grade']=='Grade 5-8') ? 'selected' : ''; ?>>
-                                Grade 5-8</option>
-                            <option value="Grade 9-10"
-                                <?php echo (isset($_POST['grade']) && $_POST['grade']=='Grade 9-10') ? 'selected' : ''; ?>>
-                                Grade 9-10</option>
-                            <option value="+2"
-                                <?php echo (isset($_POST['grade']) && $_POST['grade']=='+2') ? 'selected' : ''; ?>>+2
-                            </option>
-                            <option value="Bachelors"
-                                <?php echo (isset($_POST['grade']) && $_POST['grade']=='Bachelors') ? 'selected' : ''; ?>>
-                                Bachelors</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Subjects:</label>
-                        <input type="text" name="subjects" class="form-control" required
-                            value="<?php echo isset($_POST['subjects']) ? htmlspecialchars($_POST['subjects']) : ''; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label>Category:</label>
-                        <select name="category" class="form-control" required>
-                            <option value="For 3 months"
-                                <?php echo (isset($_POST['category']) && $_POST['category']=='For 3 months') ? 'selected' : ''; ?>>
-                                For 3 months</option>
-                            <option value="For exam only"
-                                <?php echo (isset($_POST['category']) && $_POST['category']=='For exam only') ? 'selected' : ''; ?>>
-                                For exam only</option>
-                            <option value="For whole year"
-                                <?php echo (isset($_POST['category']) && $_POST['category']=='For whole year') ? 'selected' : ''; ?>>
-                                For whole year</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Row 4: Two Columns for Timing -->
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Class Start Time (e.g., 5 PM):</label>
-                        <input type="text" name="class_start_time" class="form-control" required
-                            value="<?php echo isset($_POST['class_start_time']) ? htmlspecialchars($_POST['class_start_time']) : ''; ?>">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Class Duration (in hours):</label>
-                        <input type="number" name="class_duration" class="form-control" required min="1"
-                            value="<?php echo isset($_POST['class_duration']) ? htmlspecialchars($_POST['class_duration']) : ''; ?>">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Row 5: Full Width for Number of Students -->
-            <div class="form-group">
-                <label>Number of Students:</label>
-                <input type="number" name="no_of_students" class="form-control" required min="1"
-                    value="<?php echo isset($_POST['no_of_students']) ? htmlspecialchars($_POST['no_of_students']) : ''; ?>">
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-block">Add Post</button>
-        </form>
+        </div>
     </div>
 </div>
 

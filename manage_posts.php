@@ -16,9 +16,12 @@ $stmt->execute([$user_id]);
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<h2 class="mb-4 text-center">My Tuition Posts</h2>
+<h2 class="mb-4 text-center" style="font-weight: bold;">My Tuition Posts</h2>
 <?php if (empty($posts)): ?>
-<p>You have not created any tuition posts yet.</p>
+    <div class="no-posts-container" style="min-height: 600px; display: flex; align-items: center; justify-content: center;">
+    <p class="text-center" style="font-weight: bold ;">You have not created any tuition posts yet.......</p>
+</div>
+<!-- <p>You have not created any tuition posts yet.</p> -->
 <?php else: ?>
 <div class="posts-container">
     <?php foreach ($posts as $post): ?>
