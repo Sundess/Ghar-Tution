@@ -1,51 +1,79 @@
--- Create the database
-CREATE DATABASE IF NOT EXISTS ghartution;
-USE ghartution;
+-- phpMyAdmin SQL Dump
+-- version 5.2.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Feb 18, 2025 at 09:17 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
--- Create the "users" table
-CREATE TABLE users (
-    id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    age INT NOT NULL,
-    gender ENUM('male', 'female', 'other') DEFAULT 'other',
-    email VARCHAR(100) NOT NULL UNIQUE,
-    phone_number VARCHAR(15) NOT NULL,  -- Expected format: "+977 XXXXXXXXXX"
-    password VARCHAR(255) NOT NULL,
-    role ENUM('parent', 'tutor', 'admin') DEFAULT 'parent',
-    cv VARCHAR(255),                     -- File path to CV PDF (for tutors)
-    tutor_location ENUM('Kathmandu', 'Bhaktapur', 'Lalitpur'),
-    profile_picture VARCHAR(255),        -- File path to profile picture
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
--- Create the "tuition_posts" table
-CREATE TABLE tuition_posts (
-    id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    user_id INT(11) NOT NULL,            -- Foreign key to users.id (the parent who creates the post)
-    title VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
-    tuition_type ENUM('online', 'offline') NOT NULL,
-    gender_preferred ENUM('any', 'male', 'female') DEFAULT 'any',
-    grade VARCHAR(20) NOT NULL,          -- e.g. "Grade 1-5", "Grade 5-8", "Grade 9-10", "+2", "Bachelors"
-    subjects VARCHAR(255) NOT NULL,        -- Comma separated list of subjects
-    class_start_time VARCHAR(50) NOT NULL, -- e.g., "5 PM"
-    class_duration INT NOT NULL,           -- Duration in hours (minimum 1)
-    no_of_students INT NOT NULL,
-    category VARCHAR(50) NOT NULL,         -- e.g., "For 3 months", "For exam only", "For whole year"
-    price DECIMAL(10,2) NOT NULL,
-    status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending',
-    post_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
 
--- Create the "applications" table
-CREATE TABLE applications (
-    id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    post_id INT(11) NOT NULL,             -- Foreign key to tuition_posts.id
-    tutor_id INT(11) NOT NULL,            -- Foreign key to users.id (the tutor applying)
-    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending',
-    FOREIGN KEY (post_id) REFERENCES tuition_posts(id),
-    FOREIGN KEY (tutor_id) REFERENCES users(id)
-);
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `ghartution`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `age` int NOT NULL,
+  `gender` enum('male','female','other') DEFAULT 'other',
+  `email` varchar(100) NOT NULL,
+  `phone_number` varchar(15) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('parent','tutor','admin') DEFAULT 'parent',
+  `cv` varchar(255) DEFAULT NULL,
+  `tutor_location` enum('Kathmandu','Bhaktapur','Lalitpur') DEFAULT NULL,
+  `profile_picture` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `age`, `gender`, `email`, `phone_number`, `password`, `role`, `cv`, `tutor_location`, `profile_picture`, `created_at`) VALUES
+(1, 'Sandesh', 'Shrestha', 21, 'male', 'sandesh@gmail.com', '+977 9812345678', '$2y$10$CFcg4soa6U4kZlct5FZyCefXIfdA3KD2GeQD8iDlwDLQrjHGkGSRy', 'parent', NULL, NULL, NULL, '2025-02-12 11:33:29'),
+(2, 'Tutor', 'Nepal', 21, 'male', 'tutor@gmail.com', '+977 9812389484', '$2y$10$.P2t.4IHdKbpU5erkEIRlugIr5gKs/e7xKdS9jJ1iAkzWV1lhiE96', 'tutor', 'uploads/67ad9bf562d68.pdf', 'Kathmandu', NULL, '2025-02-13 07:15:01'),
+(3, 'Admin', 'User', 30, 'male', 'admin@example.com', '+977 9876543210', '$2y$10$NgW29s67RKKtk1gJnF7CZe2M1ke97fa4OLGb57URuj3EUew9.d2Kq', 'admin', NULL, NULL, NULL, '2025-02-13 07:17:48');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
